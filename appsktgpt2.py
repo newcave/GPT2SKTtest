@@ -2,7 +2,6 @@ import streamlit as st
 from transformers import GPT2LMHeadModel, PreTrainedTokenizerFast, pipeline
 
 # Load model and tokenizer
-
 def get_model():
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
     model.eval()
@@ -26,13 +25,13 @@ generation_args = dict(
     early_stopping=True
 )
 
-st.title("Korean Text Generator")
-input_text = st.text_input("Enter a starting text:")
-generate_button = st.button("Generate")
+st.title("한국어 텍스트 생성기")
+input_text = st.text_input("시작 텍스트를 입력하세요:")
+generate_button = st.button("생성")
 
 if generate_button:
     if input_text:
         generated_text = generator(input_text, **generation_args)
         st.write(generated_text[0]['generated_text'])
     else:
-        st.write("Please enter some text to generate.")
+        st.write("생성할 텍스트를 입력하세요.")
