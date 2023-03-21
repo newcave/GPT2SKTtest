@@ -14,7 +14,7 @@ default_text = ""
 text = st.text_area("Input Text:", value=default_text)
 punct = ('!', '?', '.')
 
-generated = ""
+generated = "대한민국 만세!"
 
 if st.button("Generate"):
     if text:
