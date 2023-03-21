@@ -13,7 +13,7 @@ def main():
 
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-    default_text = "대한민국 만세?"
+    default_text = ""
     text = st.text_area("Input Text:", value=default_text)
     punct = ('!', '?', '.')
 
