@@ -1,61 +1,36 @@
+import streamlit as st
 import torch
-import string
-#import streamlit as st
-from transformers import GPT2LMHeadModel, PreTrainedTokenizerFast
+from transformers import GPT2LMHeadModel, GPT2Config, PreTrainedTokenizerFast, pipeline
 
-
-#@st.cache(allow_output_mutation=True)
-def get_model():
-    model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
-    model.eval()
-    return model
+st.title("Korean GPT-2 Example")
 
 tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
-                                                    bos_token='</s>',
-                                                    eos_token='</s>',
-                                                    unk_token='<unk>',
-                                                    pad_token='<pad>',
-                                                    mask_token='<mask>')
+                                                    bos_token='</s>', eos_token='</s>', unk_token='<unk>',
+                                                    pad_token='<pad>', mask_token='<mask>')
 
+model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
-default_text = "현대인들은 왜 항상 불안해 할까?"
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+generation_args = dict(
+    num_beams=4,
+    repetition_penalty=2.0,
+    no_repeat_ngram_size=4,
+    eos_token_id=tokenizer.eos_token_id,
+    max_length=64,
+    do_sample=True,
+    top_k=50,
+    early_stopping=True
+)
 
-N_SENT = 3
-
-model = get_model()
-
-
-st.title("KoGPT2 Demo Page(ver 2.0)")
-
-st.markdown("""
-### 모델
-| Model       |  # of params |   Type   | # of layers  | # of heads | ffn_dim | hidden_dims | 
-|--------------|:----:|:-------:|--------:|--------:|--------:|--------------:|
-| `KoGPT2` |  125M  |  Decoder |   12     | 12      | 3072    | 768 | 
-### 샘플링 방법
-- greedy sampling
-- 최대 출력 길이 : 128/1,024
-## Conditional Generation
-""")
-
-text = st.text_area("Input Text:", value=default_text)
-st.write(text)
-punct = ('!', '?', '.')
-
-if text:
-    st.markdown("## Predict")
-    with st.spinner('processing..'):
-        print(f'input > {text}') 
-        input_ids = tokenizer(text)['input_ids']
-        gen_ids = model.generate(torch.tensor([input_ids]),
-                                    max_length=128,
-                                    repetition_penalty=2.0)
-        generated = tokenizer.decode(gen_ids[0,:].tolist()).strip()
-        if generated != '' and generated[-1] not in punct:
-            for i in reversed(range(len(generated))):
-                if generated[i] in punct:
-                    break
-            generated = generated[:(i+1)]
-        print(f'KoGPT > {generated}')
-    st.write(generated)
-
+if st.button("Generate"):
+    examples = [
+        "0 : **는 게임 좋아하니\n1 :",
+        "0 : 어제 강남에서 살인사건 났대 ㅜㅜ 너무 무서워\n1 : 헐 왜? 무슨 일 있었어?\n0 : 사진보니까 막 피흘리는 사람있고 경찰들이 떠서 제압하고 난리도 아니었다던데??\n1 :",
+        "0 : 자기야 어제는 나한테 왜 그랬어?\n1 : 뭔 일 있었어?\n0 : 어떻게 나한테 말도 없이 그럴 수 있어? 나 진짜 실망했어\n1 : "
+    ]
+    
+    generated_text = generator(examples, **generation_args)
+    
+    for idx, text in enumerate(generated_text):
+        st.write(f"Example {idx + 1}:")
+        st.write(text['generated_text'])
