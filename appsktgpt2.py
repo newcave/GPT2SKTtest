@@ -14,6 +14,8 @@ default_text = ""
 text = st.text_area("Input Text:", value=default_text)
 punct = ('!', '?', '.')
 
+generated = ""
+
 if st.button("Generate"):
     if text:
         st.markdown("## Predict")
@@ -31,3 +33,11 @@ if st.button("Generate"):
                 generated = generated[:(i+1)]
             print(f'KoGPT > {generated}')
         st.write(generated)
+
+if st.button("Copy Text"):
+    if generated:
+        st.markdown(f"<textarea readonly>{generated}</textarea>", unsafe_allow_html=True)
+        st.write("Text copied to clipboard.")
+
+if st.button("Reset Input"):
+    text = st.text_area("Input Text:", value="")
