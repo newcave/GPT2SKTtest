@@ -23,6 +23,8 @@ default_text = "현대인들은 왜 항상 불안해 할까?"
 N_SENT = 3
 
 model = get_model()
+
+
 st.title("KoGPT2 Demo Page(ver 2.0)")
 
 st.markdown("""
