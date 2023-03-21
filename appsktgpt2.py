@@ -7,7 +7,8 @@ def get_model():
     model.eval()
     return model
 
-model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+# model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+model = get_model()
 tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
                                                     bos_token='</s>', eos_token='</s>', unk_token='<unk>',
                                                     pad_token='<pad>', mask_token='<mask>')
