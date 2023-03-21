@@ -1,4 +1,5 @@
 import streamlit as st
+import string
 from transformers import GPT2LMHeadModel, PreTrainedTokenizerFast, pipeline
 
 # Load model and tokenizer
