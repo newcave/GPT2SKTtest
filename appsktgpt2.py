@@ -2,6 +2,12 @@ import streamlit as st
 from transformers import GPT2LMHeadModel, PreTrainedTokenizerFast, pipeline
 
 # Load model and tokenizer
+
+def get_model():
+    model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
+    model.eval()
+    return model
+
 model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
                                                     bos_token='</s>', eos_token='</s>', unk_token='<unk>',
