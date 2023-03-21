@@ -4,7 +4,7 @@ import string
 from transformers import GPT2LMHeadModel, PreTrainedTokenizerFast
 
 
-#@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True)
 def get_model():
     model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
     model.eval()
@@ -56,3 +56,4 @@ if text:
             generated = generated[:(i+1)]
         print(f'KoGPT > {generated}')
     st.write(generated)
+
