@@ -14,17 +14,17 @@ tokenizer = PreTrainedTokenizerFast.from_pretrained("skt/kogpt2-base-v2",
                                                     pad_token='<pad>', mask_token='<mask>')
 
 # Set up text generation pipeline
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
-generation_args = dict(
-    num_beams=4,
-    repetition_penalty=2.0,
-    no_repeat_ngram_size=4,
-    eos_token_id=375,  # \n
-    max_new_tokens=64,
-    do_sample=True,
-    top_k=50,
-    early_stopping=True
-)
+#generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+#generation_args = dict(
+#    num_beams=4,
+#    repetition_penalty=2.0,
+#    no_repeat_ngram_size=4,
+#    eos_token_id=375,  # \n
+#    max_new_tokens=64,
+#    do_sample=True,
+#    top_k=50,
+#    early_stopping=True
+#)
 
 st.title("한국어 텍스트 생성기")
 input_text = st.text_input("시작 텍스트를 입력하세요:")
