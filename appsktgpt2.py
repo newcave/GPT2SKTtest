@@ -48,7 +48,8 @@ generated = ""
 # GPT환경변수 설정입니다.
 
 st.write("| Parameter | 주요 GPT환경변수 설명입니다. |")
-st.write("| --- | --- |")
+st.write("| ----------------------------------------|")
+st.write("| ----------------------------------------|")
 st.write("| `max_length` | 생성할 최대 길이를 결정합니다. |")
 st.write("| `top_k` | 다음 단어의 후보군을 결정할 때 사용되는 상위 k 개의 단어를 선택합니다. |")
 st.write("| `repetition_penalty` | 반복을 방지하기 위해 사용되는 패널티 값입니다. 이 값이 높을수록 모델은 중복 단어를 생성하지 않으려고 노력합니다. |")
@@ -59,7 +60,7 @@ st.write("| `early_stopping` | 생성된 문장이 `eos_token_id`를 포함하�
 
 max_length = st.slider("문장길리", 64, 256, 128, step=64)
 top_k = st.slider("Top K", 10, 100, 50, step=5)
-repetition_penalty = st.slider("Repetition Penalty", 1.0, 3.0, 2.0, step=0.1)
+repetition_penalty = st.slider("Repetition Penalty", 1, 3, 2, step=1)
 #no_repeat_ngram_size = st.slider("No Repeat Ngram Size", 1, 10, 4, step=1)
 eos_token_id = st.slider("EOS Token ID", 1, 1000, 375, step=1)
 max_new_tokens = st.slider("Max New Tokens", 1, 128, 64, step=1)
