@@ -49,7 +49,7 @@ if text:
         input_ids = tokenizer(text)['input_ids']
         gen_ids = model.generate(torch.tensor([input_ids]),
                                     max_length=128,
-                                    repetition_penalty=2.0)
+                                    repetition_penalty=2)
         generated = tokenizer.decode(gen_ids[0,:].tolist()).strip()
         if generated != '' and generated[-1] not in punct:
             for i in reversed(range(len(generated))):
