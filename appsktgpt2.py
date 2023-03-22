@@ -12,6 +12,10 @@ model = GPT2LMHeadModel.from_pretrained('skt/kogpt2-base-v2')
 
 default_text = ""
 text = st.text_area("Input Text:", value=default_text)
+
+max_length = st.slider("Max Length", 10, 256, 128, step=1)
+repetition_penalty = st.slider("Repetition Penalty", 1.0, 3.0, 2.0, step=0.1)
+
 punct = ('!', '?', '.')
 
 generated = ""
@@ -23,8 +27,8 @@ if st.button("Generate"):
             print(f'input > {text}') 
             input_ids = tokenizer(text)['input_ids']
             gen_ids = model.generate(torch.tensor([input_ids]),
-                                max_length=128,
-                                repetition_penalty=2.0)
+                                max_length=max_length,
+                                repetition_penalty=repetition_penalty)
             generated = tokenizer.decode(gen_ids[0,:].tolist()).strip()
             if generated != '' and generated[-1] not in punct:
                 for i in reversed(range(len(generated))):
@@ -40,4 +44,4 @@ if st.button("Copy Text"):
         st.write("Please manually copy the text above.")
 
 if st.button("Reset Input"):
-    st.experimental_rerun()
+    st.text_area("Input Text:", value=default_text)
