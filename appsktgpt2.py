@@ -17,7 +17,7 @@ punct = ('!', '?', '.')
 
 max_length = st.slider("최대 문장 길이", 64, 256, 128, step=64)
 top_k = st.slider("Top K", 10, 100, 50, step=5)
-repetition_penalty = st.slider("Repetition Penalty", 2, 4, 2, step=1)
+#repetition_penalty = st.slider("Repetition Penalty", 2, 4, 2, step=1)
 #no_repeat_ngram_size = st.slider("No Repeat Ngram Size", 1, 10, 4, step=1)
 eos_token_id = st.slider("EOS Token ID", 1, 1000, 375, step=1)
 max_new_tokens = st.slider("Max New Tokens", 1, 128, 64, step=1)
@@ -33,7 +33,7 @@ if st.button("Generate"):
             gen_ids = model.generate(torch.tensor([input_ids]),
                                       max_length=max_length,
                                       num_beams=4,
-                                      repetition_penalty=2,
+#                                      repetition_penalty=2,
                                       no_repeat_ngram_size=3,
                                       eos_token_id=eos_token_id,
                                       max_new_tokens=max_new_tokens,
