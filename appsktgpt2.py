@@ -64,11 +64,13 @@ st.write("| `max_new_tokens` | 생성할 최대 토큰 수입니다. 이 값을 
 st.write("| `early_stopping` | 생성된 문장이 `eos_token_id`를 포함하면 조기 종료합니다. |")
 
 
-        
 if st.button("Copy Text"):
     if generated:
         st.code(generated)
         st.write("Please manually copy the text above.")
 
-if st.button("Reset Input"):
-    st.text_area("Input Text:", value=default_text, key="my_unique_key")
+#if st.button("Reset Input"):
+#    st.text_area("Input Text:", value=default_text, key="my_unique_key")
+    
+if st.button("Refresh"):
+    st.experimental_rerun()
