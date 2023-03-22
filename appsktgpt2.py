@@ -37,7 +37,7 @@ if st.button("Generate"):
                                       no_repeat_ngram_size=3,
                                       eos_token_id=eos_token_id,
                                       max_new_tokens=max_new_tokens,
-                                      do_sample=true,
+                                      # do_sample=true,
                                       top_k=top_k,
                                       early_stopping=early_stopping)
             generated = tokenizer.decode(gen_ids[0,:].tolist()).strip()
@@ -55,7 +55,6 @@ generated = ""
 # GPT환경변수 설정입니다.
 
 st.write("| Parameter | 주요 GPT환경변수 설명입니다. |")
-st.write("| ----------------------------------------|")
 st.write("| ----------------------------------------|")
 st.write("| `max_length` | 생성할 최대 길이를 결정합니다. |")
 st.write("| `top_k` | 다음 단어의 후보군을 결정할 때 사용되는 상위 k 개의 단어를 선택합니다. |")
