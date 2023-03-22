@@ -72,5 +72,5 @@ if st.button("Copy Text"):
 #if st.button("Reset Input"):
 #    st.text_area("Input Text:", value=default_text, key="my_unique_key")
     
-if st.button("Refresh"):
-    st.experimental_rerun()
+#if st.button("Refresh"):
+#    st.experimental_rerun()
