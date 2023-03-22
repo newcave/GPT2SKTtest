@@ -22,9 +22,9 @@ if st.button("Generate"):
             print(f'input > {text}') 
             input_ids = tokenizer(text)['input_ids']
             gen_ids = model.generate(torch.tensor([input_ids]),
-                                      max_length=128,
+                                      max_length=max_length,
                                       num_beams=4,
-                                      repetition_penalty=repetition_penalty,
+                                      repetition_penalty=2,
                                       no_repeat_ngram_size=3,
                                       eos_token_id=eos_token_id,
                                       max_new_tokens=max_new_tokens,
