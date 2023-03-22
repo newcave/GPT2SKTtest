@@ -71,4 +71,4 @@ if st.button("Copy Text"):
         st.write("Please manually copy the text above.")
 
 if st.button("Reset Input"):
-    st.text_area("Input Text:", value=default_text)
+    st.text_area("Input Text:", value=default_text, key="my_unique_key")
