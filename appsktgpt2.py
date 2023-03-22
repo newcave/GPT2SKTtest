@@ -15,6 +15,15 @@ text = st.text_area("Input Text:", value=default_text)
 
 punct = ('!', '?', '.')
 
+max_length = st.slider("최대 문장 길이", 64, 256, 128, step=64)
+top_k = st.slider("Top K", 10, 100, 50, step=5)
+repetition_penalty = st.slider("Repetition Penalty", 1, 3, 2, step=1)
+#no_repeat_ngram_size = st.slider("No Repeat Ngram Size", 1, 10, 4, step=1)
+eos_token_id = st.slider("EOS Token ID", 1, 1000, 375, step=1)
+max_new_tokens = st.slider("Max New Tokens", 1, 128, 64, step=1)
+#do_sample = st.checkbox("Do Sample", value=True)
+early_stopping = st.checkbox("Early Stopping", value=True)
+
 if st.button("Generate"):
     if text:
         st.markdown("## 결과를 표출합니다. ")
@@ -43,8 +52,6 @@ if st.button("Generate"):
 generated = ""
         
 
-       
-
 # GPT환경변수 설정입니다.
 
 st.write("| Parameter | 주요 GPT환경변수 설명입니다. |")
@@ -57,15 +64,6 @@ st.write("| `eos_token_id` | 문장의 끝을 나타내는 토큰 ID입니다. |
 st.write("| `max_new_tokens` | 생성할 최대 토큰 수입니다. 이 값을 초과하는 경우 모델은 생성을 중지합니다. |")
 st.write("| `early_stopping` | 생성된 문장이 `eos_token_id`를 포함하면 조기 종료합니다. |")
 
-
-max_length = st.slider("문장길리", 64, 256, 128, step=64)
-top_k = st.slider("Top K", 10, 100, 50, step=5)
-repetition_penalty = st.slider("Repetition Penalty", 1, 3, 2, step=1)
-#no_repeat_ngram_size = st.slider("No Repeat Ngram Size", 1, 10, 4, step=1)
-eos_token_id = st.slider("EOS Token ID", 1, 1000, 375, step=1)
-max_new_tokens = st.slider("Max New Tokens", 1, 128, 64, step=1)
-#do_sample = st.checkbox("Do Sample", value=True)
-early_stopping = st.checkbox("Early Stopping", value=True)
 
         
 if st.button("Copy Text"):
